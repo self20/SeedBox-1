@@ -1,0 +1,10 @@
+
+src/main/resources/
+build/
+
+#gradle
+.gradle/
+
+
+#eclipse
+.settings/
