@@ -33,7 +33,7 @@ import seedbox.files.MimeType;
 
 public class test {
 
-	
+	/*
 	public static void main(String[] args){
 
 		File fileToBeUploaded=new File("D:\\Movie\\The.Martian.2015.1080p.BluRay.x264.DTS-WiKi.Sample.mkv");
@@ -41,7 +41,7 @@ public class test {
 		System.out.println(MimeType.getMimeType(fileToBeUploaded));
 
 	}
-	
+	*/
 	
 	/*
 	public static void main(String args[]) throws IOException{
