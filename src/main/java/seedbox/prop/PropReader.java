@@ -16,7 +16,7 @@ public class PropReader {
 		prop=new Properties();
 		
 		try {
-			prop.load(new FileInputStream("config.properties"));
+			prop.load(new FileInputStream(Location.PATH+"config.properties"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

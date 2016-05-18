@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 
-import com.abercap.mediainfo.api.MediaInfo;
 import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.Drive;
 
@@ -60,19 +59,19 @@ public class test {
 	}
 	*/
 	
-	/*
+	
 	public static void main(String args[]) throws IOException{
 		
 		
 		Drive driveService=DriveService.getDriveService();
 
-		File f=new File("D:\\FileA.txt");
+		File f=new File("/media/chou/5E520C69520C486B/1080p/電影/Kaiji 2/Kaiji.2.2011.BluRay.1080p.x264.10bit.DTS-jimmy.mkv");
 		
 		FilesUploader fa=new FilesUploader();
 		fa.uploadFile(driveService, f, null);
 		
 	}
-	*/
+	
 	/*
 	public static void main(String args[]) throws IOException{
 		

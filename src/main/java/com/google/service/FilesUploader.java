@@ -56,6 +56,7 @@ public class FilesUploader {
     	private String type=null;
     	private long timeStampBeg;
     	private long timeStampEnd;
+    	private long next;
     	
     	
     	private FileUploadProgressListener(FileContent fc){
@@ -68,6 +69,8 @@ public class FilesUploader {
 
     		long progress=Math.round(uploader.getProgress()*100);
     		
+    		
+    		
     		switch(uploader.getUploadState()){
     		case INITIATION_STARTED:
     			timeStampBeg=System.currentTimeMillis();
@@ -77,12 +80,12 @@ public class FilesUploader {
     			timeStampEnd=System.currentTimeMillis();
     			MsgSender.send(PropReader.getProp("info.upload.done")+"\n"+PropReader.getProp("info.upload.file")+":"+fileName+"\n"+"MimeType:"+type+"\n"+PropReader.getProp("info.upload.timeSpent")+":"+(timeStampEnd-timeStampBeg)/1000+"s");
     			System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-    			System.out.print("-----"+progress+"%-----");
+    			System.out.print("-----"+progress+"%-----\n");
     		break;
     		case MEDIA_IN_PROGRESS:
-    			
-    			if(progress%10==0){
+    			if(progress==next){
         			MsgSender.send(PropReader.getProp("info.upload.progress")+"\n"+PropReader.getProp("info.upload.file")+":"+fileName+"\n"+"MimeType:"+type);
+        			next+=10;
     			}
     			
     			System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");

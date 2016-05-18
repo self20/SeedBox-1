@@ -25,13 +25,14 @@ public class FileMang implements Serializable{
 
 
 	private static final long serialVersionUID = 8130380429043506178L;
-	List<File> fileList=null;
-	List<File> dirList=null;
+	private List<File> fileList=null;
+	private List<File> dirList=null;
 	
+	public static final String FILTER=".mkv";
 	
-	Properties prop=new Properties();
+	private Properties prop=new Properties();
 	
-	Logger logger=null;
+	private Logger logger=null;
 	
 	private FileMang(){
 		
@@ -47,6 +48,12 @@ public class FileMang implements Serializable{
 		for(File f:files){
 			if(f.isDirectory()){
 				dirList.add(f);
+				for(File f2:f.listFiles()){
+					if(f2.isFile() && f2.getName().contains(FILTER))
+						fileList.add(f2);
+				}
+				
+				
 			}else if(f.isFile()){
 				fileList.add(f);
 			}else{

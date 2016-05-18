@@ -13,6 +13,7 @@ import com.google.service.DriveService;
 import com.google.service.FilesUploader;
 
 import seedbox.files.FileMang;
+import seedbox.prop.Location;
 
 public class command {
 
@@ -20,6 +21,8 @@ public class command {
 	
 	public static void main(String[] args){
 
+		
+		
 		argTrim(args);
 		
 		if((fmg=getFileMang())==null){
@@ -105,9 +108,11 @@ public class command {
 	public static void storeFileMang(Serializable serialObject){
 		FileOutputStream fos=null;
 		ObjectOutputStream oos=null;
-		
+
 		try {
-			fos=new FileOutputStream("FileMangObject");
+			
+			
+			fos=new FileOutputStream(Location.PATH+"FileMangObject");
 			oos=new ObjectOutputStream(fos);
 			oos.writeObject(serialObject);
 			
@@ -128,7 +133,7 @@ public class command {
 		FileMang fm=null;
 		
 		try {
-			fis=new FileInputStream("FileMangObject");
+			fis=new FileInputStream(Location.PATH+"FileMangObject");
 			ois=new ObjectInputStream(fis);
 			fm=(FileMang)ois.readObject();
 			
