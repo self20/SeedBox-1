@@ -36,10 +36,11 @@ public class FilesUploader {
   		  Create insert = service.files().create(file,fc);
   		  MediaHttpUploader uploader=insert.getMediaHttpUploader();
   		  uploader.setDirectUploadEnabled(false);
-  		  uploader.setChunkSize(MediaHttpUploader.MINIMUM_CHUNK_SIZE);
+  		  uploader.setChunkSize(MediaHttpUploader.MINIMUM_CHUNK_SIZE*10);
   		  uploader.setProgressListener(new FileUploadProgressListener(fc));
   		  file=insert.execute();
 
+  		
   	  }catch (IOException e) {
   		  e.printStackTrace();
   	  }
@@ -56,8 +57,8 @@ public class FilesUploader {
     	private String type=null;
     	private long timeStampBeg;
     	private long timeStampEnd;
-    	private long next;
-    	
+    	private long lastTimeStamp=0;
+    	private long lastByteUploaded=0;
     	
     	private FileUploadProgressListener(FileContent fc){
     		this.fileName=fc.getFile().getName();
@@ -68,13 +69,18 @@ public class FilesUploader {
     	public void progressChanged(MediaHttpUploader uploader)throws IOException{
 
     		long progress=Math.round(uploader.getProgress()*100);
+    		long curTimeStamp=System.currentTimeMillis();
+    		long curByteUploaded=uploader.getNumBytesUploaded();
+
+    		long speed=Math.round((((double)curByteUploaded-lastByteUploaded)/Math.pow(2, 20))/(((double)curTimeStamp-lastTimeStamp)/1000));
     		
-    		
-    		
+    		lastTimeStamp=curTimeStamp;
+    		lastByteUploaded=curByteUploaded;
+
     		switch(uploader.getUploadState()){
     		case INITIATION_STARTED:
     			timeStampBeg=System.currentTimeMillis();
-    			System.out.println(PropReader.getProp("info.upload.begin"));
+    			//System.out.println(PropReader.getProp("info.upload.begin"));
     		break;
     		case MEDIA_COMPLETE:
     			timeStampEnd=System.currentTimeMillis();
@@ -83,13 +89,8 @@ public class FilesUploader {
     			System.out.print("-----"+progress+"%-----\n");
     		break;
     		case MEDIA_IN_PROGRESS:
-    			if(progress==next){
-        			MsgSender.send(PropReader.getProp("info.upload.progress")+"\n"+PropReader.getProp("info.upload.file")+":"+fileName+"\n"+"MimeType:"+type);
-        			next+=10;
-    			}
-    			
-    			System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-    			System.out.print("-----"+progress+"%-----");
+    			System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+    			System.out.print("-----"+progress+"%-----"+speed+" MB/s");
     		break;
 			case INITIATION_COMPLETE:
 				break;
@@ -98,8 +99,9 @@ public class FilesUploader {
 			default:
 				break;
     		}
+
     	}
-    	
+
     }
     
     

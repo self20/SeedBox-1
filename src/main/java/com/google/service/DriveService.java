@@ -77,10 +77,8 @@ public class DriveService {
                     .setDataStoreFactory(DATA_STORE_FACTORY)
                     .setAccessType("offline")
                     .build();
-        Credential credential = new AuthorizationCodeInstalledApp(
-            flow, new LocalServerReceiver()).authorize("user");
-        System.out.println(
-                "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+        //System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
     }
 

@@ -65,7 +65,7 @@ public class test {
 		
 		Drive driveService=DriveService.getDriveService();
 
-		File f=new File("/media/chou/5E520C69520C486B/1080p/電影/Kaiji 2/Kaiji.2.2011.BluRay.1080p.x264.10bit.DTS-jimmy.mkv");
+		File f=new File("D:/Movie/Deadpool.2016.1080p.BluRay.x264.DTS-WiKi.mkv");
 		
 		FilesUploader fa=new FilesUploader();
 		fa.uploadFile(driveService, f, null);

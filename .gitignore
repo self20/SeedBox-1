@@ -1,6 +1,7 @@
 #Build
 src/main/resources/
 build/
+bin/
 
 #Gradle
 .gradle/
@@ -8,7 +9,10 @@ build/
 
 #Eclipse
 .settings/
-
+_classpath
+.classpath
+_project
+.project
 *.class
 
 
