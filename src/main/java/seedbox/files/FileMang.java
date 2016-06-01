@@ -48,7 +48,8 @@ public class FileMang implements Serializable{
 		for(File f:files){
 			if(f.isDirectory()){
 				dirList.add(f);
-				System.out.println("Name"+f.getName());
+				//System.out.println("Name"+f.getName());
+				if(f.listFiles().length>0)
 				for(File f2:f.listFiles()){
 					if(f2.isFile() && f2.getName().contains(FILTER))
 						fileList.add(f2);
