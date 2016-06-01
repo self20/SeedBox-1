@@ -5,6 +5,7 @@ bin/
 
 #Gradle
 .gradle/
+build.gradle
 
 
 #Eclipse

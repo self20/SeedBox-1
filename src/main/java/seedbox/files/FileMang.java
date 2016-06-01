@@ -48,6 +48,7 @@ public class FileMang implements Serializable{
 		for(File f:files){
 			if(f.isDirectory()){
 				dirList.add(f);
+				System.out.println("Name"+f.getName());
 				for(File f2:f.listFiles()){
 					if(f2.isFile() && f2.getName().contains(FILTER))
 						fileList.add(f2);
@@ -115,6 +116,18 @@ public class FileMang implements Serializable{
 		
 		return fileList.get(i);
 		
+	}
+	
+	
+	public File getFile(String fileName){
+		
+		for(File f:fileList){
+			if(f.getName().contains(fileName)){
+				return f;
+			}
+		}
+
+		return null;
 	}
 	
 

@@ -40,7 +40,13 @@ public class command {
 			break;
 			case "-upload":
 				String fileIdofList=args[1];
-				doUpload(Integer.parseInt(fileIdofList));
+				
+				if(fileIdofList.matches("[0-9]*")){
+					doUploadByNo(Integer.parseInt(fileIdofList));
+				}else{
+					doUploadByFilename(fileIdofList);
+				}
+
 			break;
 			case "-refresh":
 				doInit();
@@ -87,7 +93,7 @@ public class command {
 	}
 	
 	
-	public static void doUpload(int fileId){
+	public static void doUploadByNo(int fileId){
 
 		Drive service = null;
 		
@@ -102,6 +108,26 @@ public class command {
 		
 		FilesUploader fa=new FilesUploader();
 		fa.uploadFile(service, f, null);
+		
+	}
+	
+	
+	public static void doUploadByFilename(String fileName){
+		
+		Drive service = null;
+		
+		try {
+			service = DriveService.getDriveService();
+		} catch (IOException e) {
+			e.printStackTrace();
+		};
+
+		
+		File f=fmg.getFile(fileName);
+		
+		FilesUploader fa=new FilesUploader();
+		fa.uploadFile(service, f, null);
+		
 	}
 	
 	
